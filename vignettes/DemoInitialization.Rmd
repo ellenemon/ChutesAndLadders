@@ -1,8 +1,8 @@
 ---
-title: "HW1"
+title: "DemoInitialization"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{HW1}
+  %\VignetteIndexEntry{DemoInitialization}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
