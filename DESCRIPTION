@@ -1,6 +1,6 @@
 Package: ChutesAndLadders
 Title: Chutes And Ladders Board Game Demonstration
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Ellen", "Jiang", , "jianglf@uw.edu", role = c("aut", "cre"))
 Description: With a user defined Chutes and Ladders game board, this package can visualize the board, demonstrate a solo player game, perform Monte Carlo simulations and visualize the results.

@@ -1,0 +1,119 @@
+---
+title: "CAL Demo"
+author: "Ellen Jiang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is a demo vignette for the package **ChutesAndLadders**. 
+
+We will define and create a game board for an old-fashioned game *Chutes and Ladders*, demonstrate a solo player game, perform simulation, visualize the results, and answer some statistical questions.
+
+The following lines of code runs the entire example
+
+```{r}
+#ChutesAndLadders Monte Carlo simulation
+rm(list=ls())
+set.seed(5)
+library(ChutesAndLadders)
+```
+
+# Part 1: Board representation
+
+```{r}
+#Create a single `board` where you store the features of the game board.
+h <- 10
+w <- 10
+ladder <- list(c(1, 38), c(4,14), c(9,31), c(21,42), c(28,84), c(36,44), c(51,67),c(71,91), c(80,100))
+chute <- list(c(98,78), c(95,75), c(93,73), c(87,24), c(64,60), c(62,19), c(56,53), c(49,11), c(47,26), c(16,6))
+board <- define_board(h, w, ladder, chute)
+```
+
+# Part 2: Plot of Game board
+
+```{r}
+# par() should help the plot be more visible.
+par(mar = c(0, 0, 0, 0))
+# show_board(board)
+show_board(board)
+```
+
+# Part 3: Verbose output of one single player game
+
+```{r}
+set.seed(5)
+play_solo(board, verbose = TRUE)
+```
+
+# Part 4: Monte Carlo Simulation
+
+```{r}
+sim <- simulate_board(board, n=10000)
+newturns <- sim[[1]]
+newladder <- sim[[2]]
+newchute <- sim[[3]]
+
+#The distribution of number of total turns
+hist(newturns, breaks = 50, main = paste("Histogram of the turns" ))
+
+#Frequency of ladders
+barplot(colSums(newladder)/sum(newladder),
+        main = "Relative Frequency of Ladders",
+        xlab = "Ladder Number",
+        ylab = "relative frequency")
+
+#Frequency of chutes
+barplot(colSums(newchute)/sum(newchute),
+        main = "Relative Frequency of Chutes",
+        names.arg = seq(length(board[[4]]),1,-1),
+        xlab = "Chute Number",
+        ylab = "relative frequency")
+```
+
+# Part 5: Results Interpretation
+
+The above simulation can help answer a lot of questions. Let us take a look.
+
+- Find the minimum number of turns. How many times out of 10,000 did a game finish with the minimum number of turns?
+```{r}
+min(newturns) #minimum nubmer of turns
+length(which(newturns == 7)) # number of times out of 10,000 that min_turn occurs
+```
+
+- Find the maximum number of turns.
+```{r}
+max(newturns)
+```
+
+- What is the median number of turns?
+```{r}
+median(newturns)
+```
+
+- What is the mean number of turns?
+```{r}
+mean(newturns)
+```
+
+- What proportion of games take 100 or more turns to complete?
+```{r}
+length(which(newturns >= 100))/sum(newturns)
+```
+
+- What proportion of games take 10 or fewer turns to complete?
+```{r}
+length(which(newturns <= 10))/sum(newturns)
+```
+
+- What proportion of games utilize ladder 9 (the shortcut to win on space 80)?
+```{r}
+length(which(newladder[,9] != 0))/10000
+```
+

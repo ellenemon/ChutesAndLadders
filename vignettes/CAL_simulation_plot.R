@@ -20,7 +20,7 @@ p2 <- barplot(colSums(newladder)/sum(newladder),
 #Frequency of chutes
 p3 <- barplot(colSums(newchute)/sum(newchute),
         main = "Relative Frequency of Chutes",
-        names.arg = seq(length(board[[3]]),1,-1),
+        names.arg = seq(length(board[[4]]),1,-1),
         xlab = "Chute Number",
         ylab = "relative frequency")
 png("~/ChutesAndLadders_simulation_plots.png", width = 800, height = 600)
