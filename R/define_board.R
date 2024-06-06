@@ -9,21 +9,18 @@
 #'
 #' @param height A positive integer representing the number of rows in the board
 #' @param width A positive integer representing the number of columns in the board
-#' @param ladder A list with sets of two positive integers, each set representing the start and end position of a ladder
-#' @param chute A list with sets of two positive integers, each set representing the start and end position of a chute
+#' @param ladder A list of vectors, each with two positive integers representing the start and end position of a ladder
+#' @param chute A list of vectors, each with two positive integers representing the start and end position of a chute
 #'
 #' @return A list containing information of four user-defined inputs
 #' @export
 #'
 #' @examples
-#' \dontrun {
-#'     height <- 10
-#'     width <- 10
-#'     ladder <- list(c(1, 38), c(4,14), c(9,31), c(21,42))
-#'     chute <- list(c(98,78), c(95,75), c(73,53), c(87,24))
-#'     the_board(height, width, ladder, chute)
-#' }
-the_board <- function(height=10, width=10,
+#' board <- define_board(height=10, width=10,
+#' ladder=list(c(1, 23), c(9,36), c(50,75), c(68,98)),
+#' chute=list(c(26,8), c(78,48), c(35,6), c(90,69)))
+#'
+define_board <- function(height=10, width=10,
                       ladder=list(c(1, 23), c(9,36), c(50,75), c(68,98)),
                       chute=list(c(26,8), c(78,48), c(35,6), c(90,69))) {
   ## Condition Check
@@ -41,11 +38,11 @@ the_board <- function(height=10, width=10,
   }
   #Check ladder and chute start/end point constraint
   ladder_pt <- lapply(seq(ladder), function(i) (ladder[[i]][1] >= ladder[[i]][2]))
-  if(any(ladder_pt)) {
+  if(any(unlist(ladder_pt))) {
     stop("The start should be smaller than the end for a ladder")
   }
   chute_pt <- lapply(seq(chute), function(i) (chute[[i]][1] <= chute[[i]][2]))
-  if(any(chute_pt)) {
+  if(any(unlist(chute_pt))) {
     stop("The start should be larger than the end for a chute")
   }
 

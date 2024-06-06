@@ -12,14 +12,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun {
-#'     height <- 10
-#'     width <- 10
-#'     ladder <- list(c(1, 38), c(4,14), c(9,31), c(21,42))
-#'     chute <- list(c(98,78), c(95,75), c(73,53), c(87,24))
-#'     theboard <- ChutesAndLadders::the_board(height, width, ladder, chute)
-#'     show_board(theboard)
-#' }
+#' board <- define_board(height=10, width=10,
+#' ladder=list(c(1, 23), c(9,36), c(50,75), c(68,98)),
+#' chute=list(c(26,8), c(78,48), c(35,6), c(90,69)))
+#'
+#' show_board(board)
 #'
 
 show_board <- function(theboard) {

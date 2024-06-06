@@ -23,18 +23,16 @@
 #' @export
 #'
 #' @examples
-#' \dontrun {
-#'     height <- 10
-#'     width <- 10
-#'     ladder <- list(c(1, 38), c(4,14), c(9,31), c(21,42))
-#'     chute <- list(c(98,78), c(95,75), c(73,53), c(87,24))
-#'     theboard <- ChutesAndLadders::the_board(height, width, ladder, chute)
-#'     play_solo(theboard)
-#' }
+#' board <- define_board(height=10, width=10,
+#' ladder=list(c(1, 23), c(9,36), c(50,75), c(68,98)),
+#' chute=list(c(26,8), c(78,48), c(35,6), c(90,69)))
+#'
+#' play_solo(board, verbose = TRUE)
 #'
 play_solo <- function(theboard, verbose = FALSE) {
 
-  spin <- sample(6, 1)
+  spin <- function() {
+    sample(6, 1)}
 
   times <- 0
   n <- 0
@@ -59,9 +57,11 @@ play_solo <- function(theboard, verbose = FALSE) {
   lt <- rep(0, length(l1))
   ct <- rep(0, length(c1))
 
-  while (n != 100) {
+  max_pos = as.integer(theboard[[1]]*theboard[[2]])
 
-    if (n < 100){
+  while (n != max_pos) {
+
+    if (n < max_pos){
       rand <- spin()
       times <- times +1
       if (verbose == TRUE) cat("Turn ", times, "\nStart at ", n, "\nSpinner ", rand, "\n")
@@ -82,7 +82,7 @@ play_solo <- function(theboard, verbose = FALSE) {
       if (verbose == TRUE) cat("\n")
     }
     else {
-      n <- 99
+      n <- max_pos - 1
       times <- times + 1
     }
     move <- c(move, n)
