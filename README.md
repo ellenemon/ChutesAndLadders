@@ -2,7 +2,7 @@
 
 # Purpose
 
-This package simulates a solo player board game Chutes and Ladders
+This package simulates a solo player board game Chutes and Ladders.
 
 - The URL to the GitHub (i.e., the source code) is: https://github.com/ellenemon/ChutesAndLadders
 - The URL to the Pkgdown webpage is: https://ellenemon.github.io/ChutesAndLadders
@@ -21,6 +21,7 @@ library(ChutesAndLadders)
 board <- ChutesAndLadders::define_board()
 ChutesAndLadders::show_board(board)
 ```
+Enjoy the game!
 
 # Session info
 
@@ -109,6 +110,4 @@ This package was developed in the following environment
 
  [1] /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/library
 ```
-
-
 
