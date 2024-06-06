@@ -5,7 +5,7 @@
 This package simulates a solo player board game Chutes and Ladders
 
 - The URL to the GitHub (i.e., the source code) is: https://github.com/ellenemon/ChutesAndLadders
-- The URL to the Pkgdown webpage is: https://
+- The URL to the Pkgdown webpage is: https://ellenemon.github.io/ChutesAndLadders
 
 # How to install
 This package is called `ChutesAndLadders`. To install, run the following code (in R):
